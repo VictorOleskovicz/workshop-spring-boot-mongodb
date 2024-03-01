@@ -12,6 +12,7 @@ import com.victorolesk.workshopmongo.domain.User;
 import com.victorolesk.workshopmongo.repository.PostRepository;
 import com.victorolesk.workshopmongo.repository.UserRepository;
 import com.victorolesk.workshopmongo.dto.AuthorDTO;
+import com.victorolesk.workshopmongo.dto.CommentDTO;
 
 @Configuration
 public class Instantiation implements CommandLineRunner {
@@ -43,6 +44,15 @@ public class Instantiation implements CommandLineRunner {
 		postRepository.saveAll(Arrays.asList(post1, post2));
 		
 		maria.getPosts().addAll(Arrays.asList(post1,post2));
+		
+		CommentDTO comment1 = new CommentDTO("Que legal Maria!", sdf.parse("27/08/2017"), new AuthorDTO(bob));
+		CommentDTO comment2 = new CommentDTO("Aproveite!!", sdf.parse("27/08/2017"), new AuthorDTO(alex));
+		
+		post1.getComments().addAll(Arrays.asList(comment1, comment2));
+		
+		postRepository.save(post1);
+
+		
 		
 		userRepository.save(maria);
 		
