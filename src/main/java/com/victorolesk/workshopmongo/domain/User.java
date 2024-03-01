@@ -1,9 +1,12 @@
 package com.victorolesk.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
@@ -17,6 +20,18 @@ public class User implements Serializable {
 	
 	public User() {
 		
+	}
+	
+	@DBRef(lazy = true)
+	public List<Posts> posts = new ArrayList<>();
+	
+
+	public List<Posts> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Posts> posts) {
+		this.posts = posts;
 	}
 
 	public User(String id, String name, String email) {
